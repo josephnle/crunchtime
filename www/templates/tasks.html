@@ -2,14 +2,31 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-checkbox item-button-right" ng-repeat="task in tasks">
+        <!--<div class="row row-center">-->
+          <!--<div class="col col-10">-->
+            <!--<label class="checkbox">-->
+              <!--<input type="checkbox">-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="col col-60">-->
+            <!--<h2>{{task.title}}</h2>-->
+            <!--<p>{{task.class}}</p>-->
+          <!--</div>-->
+          <!--<div class="col col-30">-->
+            <!--<button class="button">-->
+              <!--DUE IN 02:12:14-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</div>-->
+
         <label class="checkbox">
           <input type="checkbox">
         </label>
-        <div>
-          <p>{{task.title}}<br />
-            {{task.class}}</p>
-        </div>
-        <button class="button">
+
+        <h2>{{task.title}}</h2>
+        <p>{{task.class}}</p>
+
+        <button class="button" style="margin-top: 10px;">
           DUE IN 02:12:14
         </button>
       </ion-item>
