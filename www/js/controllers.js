@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -30,6 +30,41 @@ angular.module('starter.controllers', [])
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
+  };
+
+  $scope.addTask = function() {
+    $scope.data = {};
+
+    // An elaborate, custom popup
+    var myPopup = $ionicPopup.show({
+      template: '<label for="title">Title</label><input id="title" type="text" ng-model="data.title">' +
+      '<label for="class">Class</label><input id="class" type="text" ng-model="data.class">' +
+      '<label for="date">Due Date</label><input id="date" type="datetime" ng-model="data.date">',
+      title: 'Enter Task Information',
+      scope: $scope,
+      buttons: [
+        {text: 'Cancel'},
+        {
+          text: '<b>Save</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if (!$scope.data.title && !$scope.data.class) {
+              //don't allow the user to close unless he enters wifi password
+              e.preventDefault();
+            }
+            else {
+              return { title: $scope.data.title, class: $scope.data.class };
+            }
+          }
+        }
+      ]
+    });
+    myPopup.then(function(res) {
+      console.log('Tapped!', res);
+    });
+    $timeout(function() {
+      myPopup.close(); //close the popup after 3 seconds for some reason
+    }, 3000);
   };
 })
 
