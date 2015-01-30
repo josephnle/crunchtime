@@ -26,6 +26,9 @@ Run `npm install -g cordova ionic` in terminal
 
 ### Step 2
 
+Run `npm install && bower install` in the project directory
+
+
 That's pretty much it to get set up! Just make sure you execute any ionic commands from within the project folder.
 
 ---
