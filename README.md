@@ -3,8 +3,6 @@
 Crunchtime is an app designed and developed by Miranda Clemmons, Joseph Le, and Jamie Santos for Scott Klemmer's COGS 
 120/CSE 170: Introduction to Human-Computer Interaction course at UC San Diego.
 
----
-
 ### Technologies Used
 
 * Ionic Framework
@@ -35,4 +33,5 @@ That's pretty much it to get set up! Just make sure you execute any ionic comman
 ## Development Instructions
 
 `ionic serve`
+
 Use this while developing. This command starts a local development server and watches/compiles SASS into CSS.
