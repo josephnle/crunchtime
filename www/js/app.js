@@ -56,6 +56,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.courses', {
+      url: "/courses",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/courses.html",
+          controller: 'CoursesCtrl'
+        }
+      }
+    })
 
   //.state('app.single', {
   //  url: "/tasks/:taskId",
