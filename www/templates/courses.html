@@ -1,4 +1,18 @@
 <ion-view view-title="Manage Courses">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+      </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+      <button class="button button-icon button-clear ion-plus" ng-click="addCourse()">
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-content>
     <ion-list>
       <ion-item class="item-icon-right" ng-repeat="course in courses">
