@@ -91,6 +91,15 @@ angular.module('starter.controllers', [])
     ];
   })
 
+  .controller('SharedListsCtrl', function($scope) {
+    $scope.lists = [
+      {id: 1, course: 'HILD 7B', uses: 67},
+      {id: 2, course: 'COGS 120', uses: 120},
+      {id: 3, course: 'COGS 187B', uses: 87},
+      {id: 4, course: 'COGS 102C', uses: 90}
+    ];
+  })
+
   .controller('TasksCtrl', function($scope) {
     $scope.tasks = [
       {id: 1, title: 'Essay', class: 'HILD 7B'},

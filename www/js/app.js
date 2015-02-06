@@ -65,6 +65,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.shared', {
+      url: "/shared",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/shared.html",
+          controller: 'SharedListsCtrl'
+        }
+      }
+    })
 
   //.state('app.single', {
   //  url: "/tasks/:taskId",
