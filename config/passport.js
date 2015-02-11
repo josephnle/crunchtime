@@ -1,4 +1,6 @@
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 var secrets = require('./secrets');
 var User = require('../models/User');
 

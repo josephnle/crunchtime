@@ -7,16 +7,28 @@ var bodyParser = require('body-parser');
 
 var session = require('express-session');
 var mongoose = require('mongoose');
+var passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
 var connectAssets = require('connect-assets');
+
+var hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerHelper('css', function(name) { return css(name) });
+hbs.registerHelper('js', function(name) { return js(name) });
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 /**
+ * Controllers (route handlers).
+ */
+var userController = require('./controllers/user');
+
+/**
  * API keys and Passport configuration.
  */
 var secrets = require('./config/secrets');
+var passportConf = require('./config/passport');
 
 var app = express();
 
@@ -27,6 +39,8 @@ mongoose.connect(secrets.db);
 mongoose.connection.on('error', function() {
     console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
 });
+
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,7 +66,24 @@ app.use(connectAssets({
 }));
 
 app.use('/', routes);
-app.use('/users', users);
+
+/**
+ * Primary app routes.
+ */
+app.get('/login', userController.getLogin);
+app.post('/login', userController.postLogin);
+app.get('/logout', userController.logout);
+app.get('/forgot', userController.getForgot);
+app.post('/forgot', userController.postForgot);
+app.get('/reset/:token', userController.getReset);
+app.post('/reset/:token', userController.postReset);
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
+app.get('/account', passportConf.isAuthenticated, userController.getAccount);
+app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
+app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -85,5 +116,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+/**
+ * Start Express server.
+ */
+app.listen(app.get('port'), function() {
+    console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
+});
 
 module.exports = app;
