@@ -5,12 +5,26 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
 var connectAssets = require('connect-assets');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+/**
+ * API keys and Passport configuration.
+ */
+var secrets = require('./config/secrets');
+
 var app = express();
+
+/**
+ * Connect to MongoDB.
+ */
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+    console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
