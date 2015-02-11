@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
 var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 var connectAssets = require('connect-assets');
 
 var routes = require('./routes/index');
@@ -36,6 +38,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: secrets.sessionSecret,
+    store: new MongoStore({ url: secrets.db, autoReconnect: true })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(connectAssets({
     paths: [path.join(__dirname, 'assets/css'), path.join(__dirname, 'assets/js')]
