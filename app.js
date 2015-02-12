@@ -12,9 +12,6 @@ var MongoStore = require('connect-mongo')(session);
 var connectAssets = require('connect-assets');
 
 var hbs = require('hbs');
-hbs.registerPartials(__dirname + '/views/partials');
-hbs.registerHelper('css', function(name) { return css(name) });
-hbs.registerHelper('js', function(name) { return js(name) });
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -115,6 +112,10 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerHelper('css', function(name) { return css(name) });
+hbs.registerHelper('js', function(name) { return js(name) });
 
 /**
  * Start Express server.
