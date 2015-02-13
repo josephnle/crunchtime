@@ -1,7 +1,18 @@
 {{> header}}
 
-<div class="container-fluid">
-
-</div>
-
+<i class="fa fa-plus fa-2x pull-right"></i>
+<table class="table">
+    {{#each tasks}}
+      <tr>
+        <td>
+          <input id="checkbox{{name}}" type="checkbox">
+        </td>
+        <td>
+          <strong>{{name}}</strong>
+          <br/>
+            {{class}}
+        </td>
+      </tr>
+    {{/each}}
+</table>
 {{> footer}}
