@@ -19,16 +19,20 @@
   ],
   "courses": [
     {
-      "name": "COGS 120"
+      "name": "COGS 120",
+      "uses": 12
     },
     {
-      "name": "CSE 140"
+      "name": "CSE 140",
+      "uses": 124
     },
     {
-      "name": "COGS 1"
+      "name": "COGS 1",
+      "uses": 76
     },
     {
-      "name": "COGS 14A"
+      "name": "COGS 14A",
+      "uses": 12
     }
   ],
   "courseLists": [
