@@ -32,8 +32,17 @@
         <hr />
         <p><strong>Add Task Manually</strong></p>
         <div class="form-group">
-          <label for="taskCourse">Course</label>
-          <input type="text" class="form-control" id="taskCourse" placeholder="">
+          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default">COGS 120</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default">HILD 7B</button>
+            </div>
+            <div class="btn-group" role="group">
+              <a href="/courses" type="button" class="btn btn-default"><i class="fa fa-plus"> Add</i></a>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="taskTitle">Task Title</label>
@@ -42,6 +51,20 @@
           <input type="text" class="form-control" id="taskTitle" placeholder="">
           <input type="text" class="form-control" id="taskTitle" placeholder="">
           <a href="#" class="pull-right"><i class="fa fa-plus"></i> Add more</a>
+        </div>
+        <div class="form-group">
+          <label for="taskDue">Due Date</label>
+          <input type="date" class="form-control" id="taskDue">
+        </div>
+        <div class="form-group">
+          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default">Shared</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default">Private</button>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <button type="button" class="btn btn-primary">Add task</button>
