@@ -19,6 +19,20 @@
   ],
   "courses": [
     {
+      "name": "COGS 120"
+    },
+    {
+      "name": "CSE 140"
+    },
+    {
+      "name": "COGS 1"
+    },
+    {
+      "name": "COGS 14A"
+    }
+  ],
+  "courseLists": [
+    {
       "name": "COGS 120",
       "owner": "sklemmer",
       "tasks": [
