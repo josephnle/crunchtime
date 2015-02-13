@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
-  // Place JavaScript code here...
 
+
+  $("#addFromSourceButton").on("click", function () {
+    $("#addTaskModal").modal("hide");
+    $("#addFromSourceModal").modal("show");
+  });
 });

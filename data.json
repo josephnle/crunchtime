@@ -16,5 +16,63 @@
       "name": "Case #3",
       "course": "MGT 181"
     }
+  ],
+  "courses": [
+    {
+      "name": "COGS 120",
+      "owner": "sklemmer",
+      "tasks": [
+        {
+          "name": "Paper Prototype",
+          "due": "02/05/15"
+        },
+        {
+          "name": "Heuristic Evaluation",
+          "due": "02/10/15"
+        },
+        {
+          "name": "First Prototype",
+          "due": "02/14/15"
+        },
+        {
+          "name": "Development Plan",
+          "due": "02/27/15"
+        },
+        {
+          "name": "User Interface",
+          "due": "03/09/15"
+        },
+        {
+          "name": "Final Testing",
+          "due": "03/17/15"
+        }
+      ]
+    },
+    {
+      "name": "COGS 187B",
+      "owner": "kirschman",
+      "tasks": [
+        {
+          "name": "Client Proposal",
+          "due": "01/27/15"
+        },
+        {
+          "name": "Mood Board",
+          "due": "02/02/15"
+        },
+        {
+          "name": "Creative Brief",
+          "due": "02/08/15"
+        },
+        {
+          "name": "Competitive Analysis",
+          "due": "02/14/15"
+        },
+        {
+          "name": "Mockup",
+          "due": "03/09/15"
+        }
+      ]
+    }
   ]
 }

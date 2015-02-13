@@ -26,7 +26,8 @@
       </div>
       <div class="modal-body">
         <div class="text-center">
-          <button class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add from Source</button>
+          <button id="addFromSourceButton" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add from
+          Source</button>
         </div>
         <hr />
         <p><strong>Add Task Manually</strong></p>
@@ -45,6 +46,43 @@
         <div class="form-group">
           <button type="button" class="btn btn-primary">Add task</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addFromSourceModal" tabindex="-1" role="dialog" aria-labelledby="addTaskTitle"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addFromSourceTitle">Add from Source</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+          <input type="text" class="form-control" placeholder="Search for a course">
+        </div>
+        <hr />
+        {{#each courses}}
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="pull-right">
+                <i class="fa fa-plus"></i>
+              </div>
+              <strong>
+                {{name}}<br/>by {{owner}}
+              </strong>
+            </li>
+            {{#each tasks}}
+            <li class="list-group-item">
+              {{name}}<br/>
+              DUE {{due}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
       </div>
     </div>
   </div>
