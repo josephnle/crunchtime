@@ -16,6 +16,7 @@ var hbs = require('hbs');
 var routes = require('./routes/index');
 var courses = require('./routes/courses');
 var shared = require('./routes/shared');
+var settings = require('./routes/settings');
 var users = require('./routes/users');
 
 /**
@@ -71,6 +72,7 @@ app.use('/', routes);
  */
 app.get('/courses', courses.view);
 app.get('/shared', shared.view);
+app.get('/settings', settings.view);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
