@@ -2,19 +2,19 @@
   "tasks": [
     {
       "name": "Development Plan",
-      "class": "COGS 120"
+      "course": "COGS 120"
     },
     {
       "name": "Problem Set",
-      "class": "ECON 100N"
+      "course": "ECON 100N"
     },
     {
       "name": "Topic Choice",
-      "class": "HILD 7B"
+      "course": "HILD 7B"
     },
     {
       "name": "Case #3",
-      "class": "MGT 181"
+      "course": "MGT 181"
     }
   ]
 }
