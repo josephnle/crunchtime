@@ -14,7 +14,7 @@ var connectAssets = require('connect-assets');
 var hbs = require('hbs');
 
 var routes = require('./routes/index');
-var courses = require('./routes/courses');
+var courses = require('./controllers/courses');
 var shared = require('./routes/shared');
 var settings = require('./routes/settings');
 var users = require('./routes/users');
