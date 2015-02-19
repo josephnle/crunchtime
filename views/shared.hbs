@@ -1,15 +1,19 @@
 {{> header}}
 
-<table class="table">
-    {{#each courses}}
-      <tr>
-        <td>
-          <strong>{{name}}</strong>
-          <br/>
-          Used: {{uses}} times
-        </td>
-      </tr>
-    {{/each}}
-</table>
+{{> nav}}
+
+<div class="container">
+  <table class="table">
+      {{#each courses}}
+        <tr>
+          <td>
+            <strong>{{name}}</strong>
+            <br/>
+            Used: {{uses}} times
+          </td>
+        </tr>
+      {{/each}}
+  </table>
+</div>
 
 {{> footer}}
