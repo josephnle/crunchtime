@@ -1,11 +1,16 @@
 // Get all of our friend data
 var Task = require('../models/Task');
+var Course = require('../models/Course');
 
 exports.index = function(req, res) {
   var tasks = Task.find({ createdBy: req.user._id }).exec(renderTasks);
 
   function renderTasks(err, tasks) {
-    res.render('tasks', {'tasks': tasks});
+    Course.find({ createdBy: req.user._id }).exec(
+      function(err, courses) {
+        res.render('tasks', {'tasks': tasks, 'courses': courses});
+      }
+    );
   }
 };
 
