@@ -89,6 +89,7 @@ app.get('/', passportConf.isAuthenticated, tasksController.index);
 app.get('/tasks', passportConf.isAuthenticated, tasksController.index);
 app.post('/tasks', passportConf.isAuthenticated, tasksController.create);
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
+app.post('/courses', passportConf.isAuthenticated, coursesController.create);
 app.get('/shared', passportConf.isAuthenticated, shared.view);
 app.get('/settings', passportConf.isAuthenticated, settings.view);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);

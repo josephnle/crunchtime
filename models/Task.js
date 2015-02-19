@@ -4,6 +4,7 @@ var taskSchema = new mongoose.Schema({
   title: String,
   due: Date,
   completedAt: Date,
+  shared: Boolean,
   createdBy: mongoose.Schema.Types.ObjectId,
   createdAt: { type: Date, default: Date.now }
 });

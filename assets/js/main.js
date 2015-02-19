@@ -9,4 +9,8 @@ $(document).ready(function() {
     $("#addTaskModal").modal("hide");
     $("#addFromSourceModal").modal("show");
   });
+
+  $('#addCourseForm').ajaxForm(function() {
+    $("#addCourseModal").modal("hide");
+  });
 });
