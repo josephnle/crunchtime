@@ -31,11 +31,27 @@ exports.search = function(req, res) {
   var query = new RegExp(req.params.query);
   var courses = Course.find({ name: query })
     .populate('createdBy')
-    .populate('tasks')
-    .exec(respond);
+    .exec(fetchTasks);
 
-  function respond(err, courses) {
-    res.status(200);
-    res.json(courses);
+  function fetchTasks(err, courses) {
+    var courseIds = [];
+
+    courses.forEach( function(course) {
+      courseIds.push(course._id);
+    });
+
+    // Find tasks by course
+    Task.find({ course: { $in: courseIds } })
+      .exec(function(err, tasks) {
+        // Join tasks with courses
+        courseIds.forEach( function(id) {
+          courses[_.findIndex(courses, '_id', id)].tasks = _.find(tasks, 'course', id);
+        });
+
+        // Respond with results
+        res.status(200);
+        res.json(courses);
+      });
   }
+
 };
