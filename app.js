@@ -9,6 +9,7 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
+var flash = require('express-flash');
 var connectAssets = require('connect-assets');
 
 var hbs = require('hbs');
@@ -60,6 +61,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(connectAssets({
     paths: [path.join(__dirname, 'assets/css'), path.join(__dirname, 'assets/js')]
