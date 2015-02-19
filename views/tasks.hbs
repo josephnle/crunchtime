@@ -40,9 +40,10 @@
 
           <form id="addTaskForm" method="POST" action="/tasks">
             <div class="form-group">
+              <label>Course</label><br />
               {{#each courses}}
                 <input type="radio" name="course" value="{{_id}}" id="course-{{name}}">
-                <label for="course-{{name}}">{{name}}</label>
+                <label style="font-weight: normal;" for="course-{{name}}">{{name}}</label>
               {{/each}}
             </div>
             <div class="form-group">
