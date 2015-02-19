@@ -13,8 +13,8 @@ var connectAssets = require('connect-assets');
 
 var hbs = require('hbs');
 
-var routes = require('./routes/index');
-var courses = require('./controllers/courses');
+var tasksController = require('./controllers/tasks');
+var coursesController = require('./controllers/courses');
 var shared = require('./routes/shared');
 var settings = require('./routes/settings');
 var users = require('./routes/users');
@@ -22,25 +22,25 @@ var users = require('./routes/users');
 /**
  * Controllers (route handlers).
  */
-//var userController = require('./controllers/user');
+var userController = require('./controllers/user');
 
 /**
  * API keys and Passport configuration.
  */
-//var secrets = require('./config/secrets');
-//var passportConf = require('./config/passport');
+var secrets = require('./config/secrets');
+var passportConf = require('./config/passport');
 
 var app = express();
 
 /**
  * Connect to MongoDB.
  */
-//mongoose.connect(secrets.db);
-//mongoose.connection.on('error', function() {
-//    console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
-//});
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+    console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+});
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,40 +52,41 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(session({
-//    resave: true,
-//    saveUninitialized: true,
-//    secret: secrets.sessionSecret,
-//    store: new MongoStore({ url: secrets.db, autoReconnect: true })
-//}));
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: secrets.sessionSecret,
+    store: new MongoStore({ url: secrets.db, autoReconnect: true })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(connectAssets({
     paths: [path.join(__dirname, 'assets/css'), path.join(__dirname, 'assets/js')]
 }));
 
-app.use('/', routes);
 
 /**
  * Primary app routes.
  */
-app.get('/courses', courses.view);
-app.get('/shared', shared.view);
-app.get('/settings', settings.view);
-//app.get('/login', userController.getLogin);
-//app.post('/login', userController.postLogin);
-//app.get('/logout', userController.logout);
-//app.get('/forgot', userController.getForgot);
-//app.post('/forgot', userController.postForgot);
-//app.get('/reset/:token', userController.getReset);
-//app.post('/reset/:token', userController.postReset);
-//app.get('/signup', userController.getSignup);
-//app.post('/signup', userController.postSignup);
-//app.get('/account', passportConf.isAuthenticated, userController.getAccount);
-//app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
-//app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
-//app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
+app.get('/login', userController.getLogin);
+app.post('/login', userController.postLogin);
+app.get('/logout', userController.logout);
+app.get('/forgot', userController.getForgot);
+app.post('/forgot', userController.postForgot);
+app.get('/reset/:token', userController.getReset);
+app.post('/reset/:token', userController.postReset);
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
+app.use('/', passportConf.isAuthenticated, tasksController.index);
+app.use('/tasks', passportConf.isAuthenticated, tasksController.index);
+app.get('/courses', passportConf.isAuthenticated, coursesController.index);
+app.get('/shared', passportConf.isAuthenticated, shared.view);
+app.get('/settings', passportConf.isAuthenticated, settings.view);
+app.get('/account', passportConf.isAuthenticated, userController.getAccount);
+app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
+app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 
 
 // catch 404 and forward to error handler
