@@ -1,4 +1,6 @@
 // Get all of our friend data
+var User = require('../models/User');
+var Task = require('../models/Task');
 var Course = require('../models/Course');
 
 exports.index = function(req, res) {
@@ -23,4 +25,17 @@ exports.create = function(req, res) {
     res.status(200);
     res.send("Task created!");
   });
+};
+
+exports.search = function(req, res) {
+  var query = new RegExp(req.params.query);
+  var courses = Course.find({ name: query })
+    .populate('createdBy')
+    .populate('tasks')
+    .exec(respond);
+
+  function respond(err, courses) {
+    res.status(200);
+    res.json(courses);
+  }
 };
