@@ -2,8 +2,11 @@
 var Course = require('../models/Course');
 
 exports.index = function(req, res) {
-  var courses = Course.find({ createdBy: req.user._id });
-  res.render('courses', courses);
+  var courses = Course.find({ createdBy: req.user._id }).exec(renderCourses);
+
+  function renderCourses(err, courses) {
+    res.render('courses', {'courses': courses});
+  }
 };
 
 exports.create = function(req, res) {

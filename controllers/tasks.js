@@ -2,8 +2,11 @@
 var Task = require('../models/Task');
 
 exports.index = function(req, res) {
-  var tasks = Task.find({ createdBy: req.user._id });
-  res.render('tasks', tasks);
+  var tasks = Task.find({ createdBy: req.user._id }).exec(renderTasks);
+
+  function renderTasks(err, tasks) {
+    res.render('tasks', {'tasks': tasks});
+  }
 };
 
 exports.create = function(req, res) {
