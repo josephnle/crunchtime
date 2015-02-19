@@ -2,6 +2,7 @@
 var User = require('../models/User');
 var Task = require('../models/Task');
 var Course = require('../models/Course');
+var _ = require('lodash');
 
 exports.index = function(req, res) {
   var courses = Course.find({ createdBy: req.user._id }).exec(renderCourses);
