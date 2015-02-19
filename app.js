@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var expressValidator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('express-flash');
 var connectAssets = require('connect-assets');
@@ -52,6 +53,7 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(session({
     resave: true,
