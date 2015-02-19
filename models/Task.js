@@ -4,7 +4,7 @@ var taskSchema = new mongoose.Schema({
   title: String,
   due: Date,
   completedAt: Date,
-  course: String,
+  course: { type: mongoose.Schema.Types.ObjectId, ref : 'Course'},
   shared: Boolean,
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref : 'User'},
   createdAt: { type: Date, default: Date.now }

@@ -3,7 +3,9 @@ var Task = require('../models/Task');
 var Course = require('../models/Course');
 
 exports.index = function(req, res) {
-  var tasks = Task.find({ createdBy: req.user._id }).exec(renderTasks);
+  var tasks = Task.find({ createdBy: req.user._id })
+    .populate('course')
+    .exec(renderTasks);
 
   function renderTasks(err, tasks) {
     Course.find({ createdBy: req.user._id }).exec(
@@ -18,6 +20,7 @@ exports.create = function(req, res) {
   var task = new Task({
     title: req.body.title,
     due: req.body.due,
+    course: req.body.course,
     createdBy: req.user._id
   });
 
