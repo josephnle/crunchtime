@@ -73,6 +73,7 @@ app.use(connectAssets({
 /**
  * Primary app routes.
  */
+// Account
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -82,8 +83,11 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.use('/', passportConf.isAuthenticated, tasksController.index);
-app.use('/tasks', passportConf.isAuthenticated, tasksController.index);
+// Application
+// Tasks
+app.get('/', passportConf.isAuthenticated, tasksController.index);
+app.get('/tasks', passportConf.isAuthenticated, tasksController.index);
+app.post('/tasks', passportConf.isAuthenticated, tasksController.create);
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
 app.get('/shared', passportConf.isAuthenticated, shared.view);
 app.get('/settings', passportConf.isAuthenticated, settings.view);
