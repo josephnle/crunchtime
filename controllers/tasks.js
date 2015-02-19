@@ -8,12 +8,17 @@ exports.index = function(req, res) {
 
 exports.create = function(req, res) {
   var task = new Task({
-    name: req.body.name,
-    description: req.body.description,
-    due: req.body.date,
+    title: req.body.title,
+    due: req.body.due,
     createdBy: req.user._id
   });
 
-  res.status(200);
-  res.send("Task created!");
+  task.save(function(err) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+    }
+    res.status(200);
+    res.send("Task created!");
+  });
 };
