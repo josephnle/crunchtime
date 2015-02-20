@@ -9,7 +9,7 @@ exports.index = function(req, res) {
   var courses = Course.find({ createdBy: req.user._id }).exec(renderCourses);
 
   function renderCourses(err, courses) {
-    res.render('courses', {'courses': courses});
+    res.render('courses', {'title': 'Courses', 'courses': courses});
   }
 };
 

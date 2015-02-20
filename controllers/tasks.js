@@ -11,7 +11,7 @@ exports.index = function(req, res) {
   function renderTasks(err, tasks) {
     Course.find({createdBy: req.user._id}).exec(
       function(err, courses) {
-        res.render('tasks', {'tasks': tasks, 'courses': courses});
+        res.render('tasks', {'title': 'Tasks', 'tasks': tasks, 'courses': courses});
       }
     );
   }

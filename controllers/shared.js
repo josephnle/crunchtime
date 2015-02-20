@@ -10,6 +10,6 @@ exports.index = function(req, res) {
     .exec(renderCourses);
 
   function renderCourses(err, courses) {
-    res.render('shared', {'courses': courses});
+    res.render('shared', {'title': 'Shared by Me', 'courses': courses});
   }
 };
