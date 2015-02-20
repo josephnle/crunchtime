@@ -48,3 +48,16 @@ exports.complete = function(req, res) {
     res.json(result);
   });
 };
+
+exports.uncomplete = function(req, res) {
+  var taskId = req.params.id;
+
+  Task.findOneAndUpdate({ _id: taskId }, { $unset: {completedAt: 1} }, {}, function(err, result) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+    }
+    res.status(200);
+    res.json(result);
+  });
+};

@@ -18,8 +18,7 @@ $(document).ready(function() {
       $(this).closest('.task').removeClass('text-muted');
       $.ajax({
         type: "POST",
-        url: "/tasks/" + taskId + "/complete",
-        data: { completedAt: null }
+        url: "/tasks/" + taskId + "/uncomplete"
       })
     }
   });
