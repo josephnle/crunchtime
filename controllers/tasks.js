@@ -34,3 +34,17 @@ exports.create = function(req, res) {
     res.send("Task created!");
   });
 };
+
+exports.complete = function(req, res) {
+  var taskId = req.params.id;
+  var completeTime = new Date(req.params.completedAt);
+
+  Task.findOneAndUpdate({ _id: taskId }, { completedAt: completeTime }, {}, function(err, result) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+    }
+    res.status(200);
+    res.json(result);
+  });
+};

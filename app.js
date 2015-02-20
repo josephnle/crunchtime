@@ -88,6 +88,7 @@ app.post('/signup', userController.postSignup);
 app.get('/', passportConf.isAuthenticated, tasksController.index);
 app.get('/tasks', passportConf.isAuthenticated, tasksController.index);
 app.post('/tasks', passportConf.isAuthenticated, tasksController.create);
+app.post('/tasks/:id/complete', passportConf.isAuthenticated, tasksController.complete);
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
 app.post('/courses', passportConf.isAuthenticated, coursesController.create);
 app.get('/courses/search', passportConf.isAuthenticated, coursesController.search);

@@ -6,11 +6,11 @@
   <a href="#" data-toggle="modal" data-target="#addTaskModal"><i class="fa fa-plus fa-2x pull-right"></i></a>
   <table class="table">
       {{#each tasks}}
-        <tr class="task" id="task-{{_id}}">
+        <tr class="task{{#if completedAt}} text-muted{{/if}}" id="task-{{_id}}">
           <td>
-            <input id="task-checkbox-{{_id}}" class="task-checkbox" type="checkbox">
+            <input id="task-checkbox-{{_id}}" class="task-checkbox" type="checkbox"{{#if completedAt}} checked{{/if}}>
           </td>
-          <td{{#if completedAt}} class="text-muted"{{/if}}>
+          <td>
             <strong>{{title}}</strong>
             <br/>
               {{course.name}}

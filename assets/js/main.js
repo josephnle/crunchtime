@@ -9,8 +9,18 @@ $(document).ready(function() {
 
     if($(this).is(':checked')){
       $(this).closest('.task').addClass('text-muted');
+      $.ajax({
+        type: "POST",
+        url: "/tasks/" + taskId + "/complete",
+        data: { completedAt: new Date() }
+      })
     } else {
       $(this).closest('.task').removeClass('text-muted');
+      $.ajax({
+        type: "POST",
+        url: "/tasks/" + taskId + "/complete",
+        data: { completedAt: null }
+      })
     }
   });
 
