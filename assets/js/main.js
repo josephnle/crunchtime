@@ -24,9 +24,29 @@ $(document).ready(function() {
   });
 
   // Form for adding a task
-  $('#addTaskForm').ajaxForm(function() {
+  $('#addTaskForm').ajaxForm(
+    {
+      beforeSubmit: null,
+      success: afterAddTask,  // post-submit callback
+      dataType:  'json',
+      clearForm: true,
+      resetForm: true
+    }
+  );
+
+  function afterAddTask(responseText, statusText, xhr, $form)
+  {
+    var html = '<tr class="task" id="task-' + responseText._id + '">';
+    html += '<td><input id="task-checkbox-' + responseText._id + ' ' +
+  'class="task-checkbox" type="checkbox"></td>';
+    html += '<td>';
+    html += '<strong>' + responseText.title + '</strong><br />' + responseText.course.name;
+    html += '</td>';
+    html += '</tr>';
+
+    $('table').append(html);
     $("#addTaskModal").modal("hide");
-  });
+  }
 
   // Form for search for a course
   $('#courseSearchForm').ajaxForm({
