@@ -18,13 +18,13 @@ exports.create = function(req, res) {
     createdBy: req.user._id
   });
 
-  course.save(function(err) {
+  course.save(function(err, course) {
     if (err) {
       res.status(400);
       res.send(err);
     }
     res.status(200);
-    res.send("Task created!");
+    res.json(course);
   });
 };
 

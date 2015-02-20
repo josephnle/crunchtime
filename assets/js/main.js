@@ -81,12 +81,35 @@ $(document).ready(function() {
     $("#addFromSourceModal").modal("show");
   });
 
-  $('#addCourseForm').ajaxForm(function() {
-    $("#addCourseModal").modal("hide");
-  });
-
 
   // Courses
+  // Add course
+  function afterAddCourse(responseText, statusText, xhr, $form)
+  {
+    var html = '<tr id="course-' + responseText.id + '">';
+    html += '<td>' + responseText.name + '</td>';
+    html += '<td>';
+    html += '<a href="#" class="pull-right">';
+    html += '<i class="fa fa-edit fa-lg"></i></a>';
+    html += '<a href="#" data-toggle="modal" data-target="#deleteCourseModal" data-course="' + responseText.id + '">';
+    html += '<i class="fa fa-trash fa-lg"></i></a>';
+    html += '</td>';
+    html += '</tr>';
+
+    $('table').append(html);
+    $("#addCourseModal").modal("hide");
+  }
+
+  $('#addCourseForm').ajaxForm(
+    {
+      beforeSubmit: null,
+      success: afterAddCourse,  // post-submit callback
+      dataType:  'json',
+      clearForm: true,
+      resetForm: true
+    }
+  );
+
   // Remove course
   $('#deleteCourseModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
@@ -104,6 +127,7 @@ $(document).ready(function() {
       })
         .done(function() {
           modal.modal('hide');
+          $('#course-' + courseId).remove();
         });
     });
   });
