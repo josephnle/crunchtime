@@ -1,11 +1,6 @@
 // An opinionated styleguide for writing sane, maintainable and scalable Sass.
 // http://sass-guidelin.es
 
-@import "vendors/bootstrap";
-@import "vendors/bootstrap-social";
-@import "vendors/font-awesome";
-@import "vendors/ionicons";
-
 html, body {
   height: 100%;
   font-size: 100%;
@@ -34,12 +29,6 @@ body {
 
 .container {
   max-width: 100%;
-}
-
-@media (max-width: $screen-sm) {
-  body {
-    font-size: 14px;
-  }
 }
 
 
