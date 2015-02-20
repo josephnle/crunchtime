@@ -28,6 +28,19 @@ exports.create = function(req, res) {
   });
 };
 
+exports.remove = function(req, res) {
+  var courseId = req.params.id;
+
+  Course.findOneAndRemove({ _id: courseId }, function(err, result) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+    }
+    res.status(204);
+    res.send();
+  });
+};
+
 exports.search = function(req, res) {
   var query = new RegExp(req.params.query);
   var courses = Course.find({ name: query })
