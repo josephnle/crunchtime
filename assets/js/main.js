@@ -1,10 +1,25 @@
 $(document).ready(function() {
   $('.datepicker').datepicker();
 
+
+  // Task list
+  // Mark task as completed when clicked
+  $(".task-checkbox").change(function() {
+    var taskId = $(this).closest('.task').attr('id').substr('task-'.length);
+
+    if($(this).is(':checked')){
+      $(this).closest('.task').addClass('text-muted');
+    } else {
+      $(this).closest('.task').removeClass('text-muted');
+    }
+  });
+
+  // Form for adding a task
   $('#addTaskForm').ajaxForm(function() {
     $("#addTaskModal").modal("hide");
   });
 
+  // Form for search for a course
   $('#courseSearchForm').ajaxForm({
     // dataType identifies the expected content type of the server response
     dataType:  'json',
@@ -51,6 +66,7 @@ $(document).ready(function() {
 
   }
 
+  // Transitions between modals
   $("#addFromSourceButton").on("click", function() {
     $("#addTaskModal").modal("hide");
     $("#addFromSourceModal").modal("show");
