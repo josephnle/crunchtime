@@ -5,7 +5,7 @@ var taskSchema = new mongoose.Schema({
   due: Date,
   completedAt: Date,
   course: { type: mongoose.Schema.Types.ObjectId, ref : 'Course'},
-  shared: Boolean,
+  shared: { type: Boolean, default: false },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref : 'User'},
   createdAt: { type: Date, default: Date.now }
 });
