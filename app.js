@@ -17,7 +17,7 @@ var hbs = require('hbs');
 
 var tasksController = require('./controllers/tasks');
 var coursesController = require('./controllers/courses');
-var shared = require('./routes/shared');
+var shared = require('./controllers/shared');
 var settings = require('./routes/settings');
 var users = require('./routes/users');
 
@@ -93,7 +93,7 @@ app.post('/tasks/:id/uncomplete', passportConf.isAuthenticated, tasksController.
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
 app.post('/courses', passportConf.isAuthenticated, coursesController.create);
 app.get('/courses/search', passportConf.isAuthenticated, coursesController.search);
-app.get('/shared', passportConf.isAuthenticated, shared.view);
+app.get('/shared', passportConf.isAuthenticated, shared.index);
 app.get('/settings', passportConf.isAuthenticated, settings.view);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

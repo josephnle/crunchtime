@@ -30,8 +30,21 @@ exports.create = function(req, res) {
       res.status(400);
       res.send(err);
     }
-    res.status(200);
-    res.send("Task created!");
+
+    // Update shared status if shared
+    if(req.body.shared) {
+      Course.findOneAndUpdate({ _id: req.body.course }, { shared: true }, {}, function(err, result) {
+        if (err) {
+          res.status(400);
+          res.send(err);
+        }
+        res.status(200);
+        res.send("Task created!");
+      })
+    } else {
+      res.status(200);
+      res.send("Task created!");
+    }
   });
 };
 
