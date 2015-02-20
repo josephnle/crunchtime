@@ -40,11 +40,11 @@
 
           <form id="addTaskForm" method="POST" action="/tasks">
             <div class="form-group">
-              <label>Course</label><br />
-              {{#each courses}}
-                <input type="radio" name="course" value="{{_id}}" id="course-{{name}}">
-                <label style="font-weight: normal;" for="course-{{name}}">{{name}}</label>
-              {{/each}}
+              <label>Course</label><br/>
+                {{#each courses}}
+                  <input type="radio" name="course" value="{{_id}}" id="course-{{name}}">
+                  <label style="font-weight: normal;" for="course-{{name}}">{{name}}</label>
+                {{/each}}
             </div>
             <div class="form-group">
               <label for="taskTitle">Task Title</label>
@@ -55,16 +55,16 @@
               <label for="taskDue">Due Date</label>
               <input class="datepicker form-control" type="text" name="due" id="taskDue" data-provide="datepicker">
             </div>
-            <!--<div class="form-group">-->
-            <!--<div class="btn-group btn-group-justified" role="group" aria-label="...">-->
-            <!--<div class="btn-group" role="group">-->
-            <!--<button type="button" class="btn btn-default">Shared</button>-->
-            <!--</div>-->
-            <!--<div class="btn-group" role="group">-->
-            <!--<button type="button" class="btn btn-default">Private</button>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div class="form-group">
+              <div class="btn-group btn-grou-justified" data-toggle="buttons">
+                <label class="btn btn-default active">
+                  <input type="radio" name="shared" id="private" autocomplete="off" checked value=0> Private
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="shared" id="public" autocomplete="off" value=1> Public
+                </label>
+              </div>
+            </div>
             <div class="form-group">
               <input type="submit" class="btn btn-primary" value="Add task"/>
             </div>
@@ -93,13 +93,13 @@
             </div>
           </form>
           <hr/>
-            <div id="courseSearchResults">
-              <ul class="list-group">
-                <li class="list-group-item">
-                  Search a course name to get started!
-                </li>
-              </ul>
-            </div>
+          <div id="courseSearchResults">
+            <ul class="list-group">
+              <li class="list-group-item">
+                Search a course name to get started!
+              </li>
+            </ul>
+          </div>
 
         </div>
       </div>

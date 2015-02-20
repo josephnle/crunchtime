@@ -21,6 +21,7 @@ exports.create = function(req, res) {
     title: req.body.title,
     due: req.body.due,
     course: req.body.course,
+    shared: req.body.shared,
     createdBy: req.user._id
   });
 
