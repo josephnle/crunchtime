@@ -92,6 +92,7 @@ app.post('/tasks/:id/complete', passportConf.isAuthenticated, tasksController.co
 app.post('/tasks/:id/uncomplete', passportConf.isAuthenticated, tasksController.uncomplete);
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
 app.post('/courses', passportConf.isAuthenticated, coursesController.create);
+app.post('/courses/:id', passportConf.isAuthenticated, coursesController.update);
 app.delete('/courses/:id', passportConf.isAuthenticated, coursesController.remove);
 app.get('/courses/search', passportConf.isAuthenticated, coursesController.search);
 app.get('/shared', passportConf.isAuthenticated, shared.index);

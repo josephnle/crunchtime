@@ -104,22 +104,6 @@ $(document).ready(function() {
 
   // Courses
   // Add course
-  function afterAddCourse(responseText, statusText, xhr, $form)
-  {
-    var html = '<tr id="course-' + responseText.id + '">';
-    html += '<td>' + responseText.name + '</td>';
-    html += '<td>';
-    html += '<a href="#" class="pull-right">';
-    html += '<i class="fa fa-edit fa-lg"></i></a>';
-    html += '<a href="#" data-toggle="modal" data-target="#deleteCourseModal" data-course="' + responseText.id + '">';
-    html += '<i class="fa fa-trash fa-lg"></i></a>';
-    html += '</td>';
-    html += '</tr>';
-
-    $('table').append(html);
-    $("#addCourseModal").modal("hide");
-  }
-
   $('#addCourseForm').ajaxForm(
     {
       beforeSubmit: null,
@@ -129,6 +113,54 @@ $(document).ready(function() {
       resetForm: true
     }
   );
+
+  function afterAddCourse(responseText, statusText, xhr, $form)
+  {
+    var html = '<tr id="course-' + responseText.id + '">';
+    html += '<td>' + responseText.name + '</td>';
+    html += '<td>';
+    html += '<a href="#" class="pull-right">';
+    html += '<i class="fa fa-edit fa-lg"></i></a>';
+    html += '<a href="#" data-toggle="modal" data-target="#deleteCourseModal" data-course="' + responseText.id + '" ' +
+    'data-name="' + responseText.name + '">';
+    html += '<i class="fa fa-trash fa-lg"></i></a>';
+    html += '</td>';
+    html += '</tr>';
+
+    $('table').append(html);
+    $("#addCourseModal").modal("hide");
+  }
+
+  // Edit course
+  $('#editCourseModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var courseId = button.data('course'); // Extract info from data-* attributes
+    var courseName = button.data('nam');
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this);
+
+    // Change course name in input
+    modal.find('.modal-body input').val(courseName);
+
+    // Change to course action URL
+    modal.find('#addCourseForm').attr('action', '/courses/' + courseId);
+    modal.find('#addCourseForm').ajaxForm(
+      {
+        beforeSubmit: null,
+        success: afterEditCourse,  // post-submit callback
+        dataType:  'json',
+        clearForm: true,
+        resetForm: true
+      }
+    );
+
+    function afterEditCourse(responseText, statusText, xhr, $form)
+    {
+      $('#course-' + responseText._id + ' .courseName').html(responseText.name);
+      $("#editCourseModal").modal("hide");
+    }
+  });
 
   // Remove course
   $('#deleteCourseModal').on('show.bs.modal', function (event) {

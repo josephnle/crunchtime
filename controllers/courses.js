@@ -28,6 +28,17 @@ exports.create = function(req, res) {
   });
 };
 
+exports.update = function(req, res) {
+  Course.findOneAndUpdate({_id: req.params.id}, {name: req.body.name}, {}, function(err, course) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+    }
+    res.status(200);
+    res.json(course);
+  })
+};
+
 exports.remove = function(req, res) {
   var courseId = req.params.id;
 
