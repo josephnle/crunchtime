@@ -43,19 +43,23 @@ exports.search = function(req, res) {
     });
 
     // Find tasks by course
-    Task.find({ course: { $in: courseIds }, shared: true })
+    Task.find()
       .lean()
+      .and([
+        { course: { $in: courseIds }},
+        { shared: true }
+      ])
       .exec(function(err, tasks) {
         // Join tasks with courses
         courseIds.forEach( function(id) {
-          var tasks = _.where(tasks, { 'course': id });
+          var courseTasks = _.where(tasks, { 'course': id });
 
           // Remove course from result if tasks are private
           if (_.isEmpty(tasks))
           {
             courses.splice(_.findIndex(courses, '_id', id), 1);
           } else {
-            courses[_.findIndex(courses, '_id', id)]['tasks'] = tasks;
+            courses[_.findIndex(courses, '_id', id)]['tasks'] = courseTasks;
           }
 
         });
