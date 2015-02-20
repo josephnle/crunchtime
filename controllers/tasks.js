@@ -5,6 +5,7 @@ var Course = require('../models/Course');
 exports.index = function(req, res) {
   var tasks = Task.find({createdBy: req.user._id})
     .populate('course')
+    .sort('due')
     .exec(renderTasks);
 
   function renderTasks(err, tasks) {
