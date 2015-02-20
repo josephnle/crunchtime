@@ -16,27 +16,39 @@ $(document).ready(function() {
 
   function processCourseSearch(data) {
     $("#courseSearchResults").empty();
-    data.forEach(function(course) {
+
+    if($.isEmptyObject(data))
+    {
       var html = '<ul class="list-group">';
       html += '<li class="list-group-item">';
-      html += '<div class="pull-right">';
-      html += '<i class="fa fa-plus"></i>';
-      html += '</div>';
-      html += '<strong> ' + course.name + '<br/>by ' + course.createdBy.profile.name + '</strong>';
-      html += '</li>';
+      html += 'No results found. Perhaps create your own tasks?';
+      html += '</li></ul>';
 
-      course.tasks.forEach(function(task) {
+      $("#courseSearchResults").html(html);
+    } else {
+      data.forEach(function(course) {
+        var html = '<ul class="list-group">';
         html += '<li class="list-group-item">';
-        html += task.title;
-        html += '<br />';
-        html += 'DUE ' + (new Date(task.due)).toDateString();
+        html += '<div class="pull-right">';
+        html += '<i class="fa fa-plus"></i>';
+        html += '</div>';
+        html += '<strong> ' + course.name + '<br/>by ' + course.createdBy.profile.name + '</strong>';
         html += '</li>';
+
+        course.tasks.forEach(function(task) {
+          html += '<li class="list-group-item">';
+          html += task.title;
+          html += '<br />';
+          html += 'DUE ' + (new Date(task.due)).toDateString();
+          html += '</li>';
+        });
+
+        html += '</ul>';
+
+        $("#courseSearchResults").append(html);
       });
+    }
 
-      html += '</ul>';
-
-      $("#courseSearchResults").append(html);
-    });
   }
 
   $("#addFromSourceButton").on("click", function() {
