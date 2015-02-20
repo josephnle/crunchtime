@@ -8,6 +8,7 @@
 
 html, body {
   height: 100%;
+  font-size: 100%;
 }
 body {
   padding: 50px 0 0 0;
@@ -34,6 +35,13 @@ body {
 .container {
   max-width: 100%;
 }
+
+@media (max-width: $screen-sm) {
+  body {
+    font-size: 14px;
+  }
+}
+
 
 @media (min-width: 1px) {
   .navbar-toggle {
