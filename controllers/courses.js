@@ -31,14 +31,26 @@ exports.create = function(req, res) {
 exports.remove = function(req, res) {
   var courseId = req.params.id;
 
-  Course.findOneAndRemove({ _id: courseId }, function(err, result) {
-    if (err) {
-      res.status(400);
-      res.send(err);
-    }
-    res.status(204);
-    res.send();
-  });
+  // Remove tasks before removing course
+  Task.find({ course: courseId })
+    .remove()
+    .exec(function(err) {
+      if (err) {
+        res.status(400);
+        res.send(err);
+      }
+
+      // Remove course
+      Course.findOneAndRemove({ _id: courseId }, function(err) {
+        if (err) {
+          res.status(400);
+          res.send(err);
+        }
+
+        res.status(204);
+        res.send();
+      });
+    });
 };
 
 exports.search = function(req, res) {
