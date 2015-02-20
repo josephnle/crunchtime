@@ -97,7 +97,7 @@ app.get('/courses/:id/copy', passportConf.isAuthenticated, coursesController.cop
 app.delete('/courses/:id', passportConf.isAuthenticated, coursesController.remove);
 app.get('/courses/search', passportConf.isAuthenticated, coursesController.search);
 app.get('/shared', passportConf.isAuthenticated, shared.index);
-app.get('/settings', passportConf.isAuthenticated, settings.view);
+//app.get('/settings', passportConf.isAuthenticated, settings.view);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
