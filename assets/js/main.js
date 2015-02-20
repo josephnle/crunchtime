@@ -74,7 +74,8 @@ $(document).ready(function() {
         var html = '<ul class="list-group">';
         html += '<li class="list-group-item">';
         html += '<div class="pull-right">';
-        html += '<i class="fa fa-plus"></i>';
+        //html += '<button class="btn btn-default copyCourseLink" id="copy-' + course._id + '" href="#"><i class="fa fa-plus"></i></button>';
+        html += '<a href="/courses/' + course._id + '/copy"><i class="fa fa-plus"></i></a>';
         html += '</div>';
         html += '<strong> ' + course.name + '<br/>by ' + course.createdBy.profile.name + '</strong>';
         html += '</li>';
@@ -94,6 +95,21 @@ $(document).ready(function() {
     }
 
   }
+
+  $(".copyCourseLink").on('click', function(e) {
+    e.preventDefault();
+
+    var courseId = $(this).attr('id').substr('copy-'.length);
+
+    $.ajax({
+      type: "POST",
+      url: "/courses/" + courseId + "/copy"
+    })
+      .done(function() {
+        $("#addFromSourceModal").modal('hide');
+        location.reload();
+      });
+  });
 
   // Transitions between modals
   $("#addFromSourceButton").on("click", function() {

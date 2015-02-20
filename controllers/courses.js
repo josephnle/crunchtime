@@ -3,6 +3,7 @@ var User = require('../models/User');
 var Task = require('../models/Task');
 var Course = require('../models/Course');
 var _ = require('lodash');
+var mongoose = require('mongoose');
 
 exports.index = function(req, res) {
   var courses = Course.find({ createdBy: req.user._id }).exec(renderCourses);
@@ -62,6 +63,46 @@ exports.remove = function(req, res) {
         res.send();
       });
     });
+};
+
+exports.copy = function(req, res) {
+  var courseId = req.params.id;
+
+  // Fetch course
+  Course.findById(courseId)
+    .exec(function(err, course) {
+      if (err) {
+        res.status(400);
+        res.send(err);
+      }
+
+      var newCourse = course;
+
+      newCourse._id = mongoose.Types.ObjectId();
+      newCourse.createdBy = req.user._id;
+
+      newCourse.save(copyTasks);
+    });
+
+  function copyTasks(err, course) {
+    Task.find({ course: courseId })
+      .lean()
+      .exec(function(err, tasks) {
+        var newTasks = [];
+        tasks.forEach(function(task) {
+          var pickedTask = _.pick(task, ['title', 'due']);
+          pickedTask.course = courseId;
+          pickedTask.createdBy = req.user._id;
+          newTasks.push(pickedTask);
+        });
+
+        Task.create(newTasks)
+          .then(function(tasks) {
+            res.status(200);
+            res.redirect('/');
+          });
+      })
+  }
 };
 
 exports.search = function(req, res) {

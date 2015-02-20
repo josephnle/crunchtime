@@ -93,6 +93,7 @@ app.post('/tasks/:id/uncomplete', passportConf.isAuthenticated, tasksController.
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);
 app.post('/courses', passportConf.isAuthenticated, coursesController.create);
 app.post('/courses/:id', passportConf.isAuthenticated, coursesController.update);
+app.get('/courses/:id/copy', passportConf.isAuthenticated, coursesController.copy);
 app.delete('/courses/:id', passportConf.isAuthenticated, coursesController.remove);
 app.get('/courses/search', passportConf.isAuthenticated, coursesController.search);
 app.get('/shared', passportConf.isAuthenticated, shared.index);
