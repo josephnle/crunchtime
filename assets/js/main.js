@@ -84,4 +84,27 @@ $(document).ready(function() {
   $('#addCourseForm').ajaxForm(function() {
     $("#addCourseModal").modal("hide");
   });
+
+
+  // Courses
+  // Remove course
+  $('#deleteCourseModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var courseId = button.data('course'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this);
+    modal.find('#deleteCourseButton').on('click', function(e) {
+      e.preventDefault();
+
+      // Send request to delete course
+      $.ajax({
+        type: "DELETE",
+        url: "/courses/" + courseId
+      })
+        .done(function() {
+          modal.modal('hide');
+        });
+    });
+  });
 });
