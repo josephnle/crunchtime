@@ -29,7 +29,7 @@ $(document).ready(function() {
         html += '<li class="list-group-item">';
         html += task.title;
         html += '<br />';
-        html += 'DUE ' + task.due;
+        html += 'DUE ' + (new Date(task.due)).toDateString();
         html += '</li>';
       });
 

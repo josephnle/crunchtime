@@ -32,6 +32,7 @@ exports.search = function(req, res) {
   var query = new RegExp(req.params.query);
   var courses = Course.find({ name: query })
     .populate('createdBy')
+    .lean()
     .exec(fetchTasks);
 
   function fetchTasks(err, courses) {
@@ -43,10 +44,11 @@ exports.search = function(req, res) {
 
     // Find tasks by course
     Task.find({ course: { $in: courseIds } })
+      .lean()
       .exec(function(err, tasks) {
         // Join tasks with courses
         courseIds.forEach( function(id) {
-          courses[_.findIndex(courses, '_id', id)].tasks = _.find(tasks, 'course', id);
+          courses[_.findIndex(courses, '_id', id)]['tasks'] = _.where(tasks, { 'course': id });
         });
 
         // Respond with results
