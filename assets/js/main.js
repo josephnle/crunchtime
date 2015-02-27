@@ -48,15 +48,20 @@ $(document).ready(function() {
     $("#addTaskModal").modal("hide");
   }
 
-  // Form for search for a course
-  $('#courseSearchForm').ajaxForm({
-    // dataType identifies the expected content type of the server response
-    dataType:  'json',
-
-    // success identifies the function to invoke when the server response
-    // has been received
-    success:   processCourseSearch
+  $("input[name='query']").change(function(){
+    $.get( "/courses/search", { query: $(this).val() } )
+      .done(processCourseSearch);
   });
+
+  // Form for search for a course
+  //$('#courseSearchForm').ajaxForm({
+  //  // dataType identifies the expected content type of the server response
+  //  dataType:  'json',
+  //
+  //  // success identifies the function to invoke when the server response
+  //  // has been received
+  //  success:   processCourseSearch
+  //});
 
   function processCourseSearch(data) {
     $("#courseSearchResults").empty();

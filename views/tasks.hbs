@@ -84,14 +84,21 @@
           <h4 class="modal-title" id="addFromSourceTitle">Add from Source</h4>
         </div>
         <div class="modal-body">
-          <form id="courseSearchForm" method="GET" action="/courses/search">
-            <div class="input-group">
-              <input type="text" class="form-control" name="query" placeholder="Search for a course">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa fa-search fa-fw"></i> Search</button>
-              </span>
-            </div>
-          </form>
+          <!--<form id="courseSearchForm" method="GET" action="/courses/search">-->
+            <!--<div class="input-group">-->
+              <!--<input type="text" class="form-control" name="query" value="" placeholder="Search for a course">-->
+              <!--<span class="input-group-btn">-->
+                <!--<button class="btn btn-default" type="submit"><i class="fa fa-search fa-fw"></i> Search</button>-->
+              <!--</span>-->
+            <!--</div>-->
+          <!--</form>-->
+          <div class="btn-group" data-toggle="buttons">
+            {{#each courses}}
+              <label class="btn btn-primary">
+                <input type="radio" name="query" class="courseSearchButton" value="{{name}}"> {{name}}
+              </label>
+            {{/each}}
+          </div>
           <hr/>
           <div id="courseSearchResults">
             <ul class="list-group">
