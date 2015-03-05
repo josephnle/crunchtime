@@ -122,6 +122,10 @@ $(document).ready(function() {
     $("#addFromSourceModal").modal("show");
   });
 
+  $("#addCourseButton").on("click", function(){
+    $("#addCourseModal").modal("hide");
+    $("#confirmAddModal").modal("show");
+  });
 
   // Courses
   // Add course
@@ -134,6 +138,7 @@ $(document).ready(function() {
       resetForm: true
     }
   );
+
 
   function afterAddCourse(responseText, statusText, xhr, $form)
   {
@@ -150,6 +155,7 @@ $(document).ready(function() {
 
     $('table').append(html);
     $("#addCourseModal").modal("hide");
+    $("#confirmAddModal").modal("show");
   }
 
   // Edit course
