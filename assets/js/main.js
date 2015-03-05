@@ -50,20 +50,24 @@ $(document).ready(function() {
 
   $("input[name='query']").change(function(){
     $.get( "/courses/search", { query: $(this).val() } )
-      .done(processCourseSearch);
+      .done(function(data) {
+        processCourseSearch(data, 'a');
+      });
   });
 
   // Form for search for a course
-  //$('#courseSearchForm').ajaxForm({
-  //  // dataType identifies the expected content type of the server response
-  //  dataType:  'json',
-  //
-  //  // success identifies the function to invoke when the server response
-  //  // has been received
-  //  success:   processCourseSearch
-  //});
+  $('#courseSearchForm').ajaxForm({
+    // dataType identifies the expected content type of the server response
+    dataType:  'json',
 
-  function processCourseSearch(data) {
+    // success identifies the function to invoke when the server response
+    // has been received
+    success:   function(data) {
+      processCourseSearch(data, 'b');
+    }
+  });
+
+  function processCourseSearch(data, version) {
     $("#courseSearchResults").empty();
 
     if($.isEmptyObject(data))
@@ -80,7 +84,7 @@ $(document).ready(function() {
         html += '<li class="list-group-item">';
         html += '<div class="pull-right">';
         //html += '<button class="btn btn-default copyCourseLink" id="copy-' + course._id + '" href="#"><i class="fa fa-plus"></i></button>';
-        html += '<a href="/courses/' + course._id + '/copy"><i class="fa fa-plus"></i></a>';
+        html += '<a class="version-' + version + '" href="/courses/' + course._id + '/copy"><i class="fa fa-plus"></i></a>';
         html += '</div>';
         html += '<strong> ' + course.name + '<br/>by ' + course.createdBy.profile.name + '</strong>';
         html += '</li>';
@@ -100,6 +104,14 @@ $(document).ready(function() {
     }
 
   }
+
+  $(".version_a").click(function(){
+    woopra.track('task_source_add_a');
+  });
+
+  $(".version_b").click(function(){
+    woopra.track('task_source_add_b');
+  });
 
   $(".copyCourseLink").on('click', function(e) {
     e.preventDefault();
