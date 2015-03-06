@@ -11,7 +11,13 @@ exports.index = function(req, res) {
   function renderTasks(err, tasks) {
     Course.find({createdBy: req.user._id}).exec(
       function(err, courses) {
-        res.render('tasks', {'title': 'Tasks', 'tasks': tasks, 'courses': courses});
+        var random_num = Math.random();
+
+        if(random_num > 0.5){
+          res.render('tasks', {'title': 'Tasks', 'tasks': tasks, 'courses': courses});
+        }else{
+          res.render('tasks_alternate', {'title': 'Tasks', 'tasks': tasks, 'courses': courses});
+        }
       }
     );
   }
