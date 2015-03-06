@@ -105,11 +105,11 @@ $(document).ready(function() {
 
   }
 
-  $(".version_a").click(function(){
+  $(".version-a").click(function(){
     woopra.track('task_source_add_a');
   });
 
-  $(".version_b").click(function(){
+  $(".version-b").click(function(){
     woopra.track('task_source_add_b');
   });
 
