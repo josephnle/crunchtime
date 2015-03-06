@@ -108,7 +108,7 @@ exports.copy = function(req, res) {
 exports.search = function(req, res) {
   var query = new RegExp(req.params.query);
   var courses = Course.find({ name: query })
-    .populate('createdBy')
+    .populate('createdBy', '-password')
     .lean()
     .exec(fetchTasks);
 
