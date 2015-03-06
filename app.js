@@ -68,7 +68,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(connectAssets({
     paths: [path.join(__dirname, 'assets/css'), path.join(__dirname, 'assets/js')]
 }));
-
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 /**
  * Primary app routes.

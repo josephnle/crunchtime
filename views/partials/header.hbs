@@ -21,6 +21,13 @@
     woopra.config({
       domain: 'crunchtimeapp.herokuapp.com'
     });
+
+    woopra.identify({
+      email: '{{user.email}}',
+      name: '{{user.profile.name}}'
+//      company: "<<YOUR CUSTOMER COMPANY HERE>>"
+    });
+
     woopra.track();
   </script>
   <!-- End of Woopra Code -->
