@@ -106,12 +106,14 @@ $(document).ready(function() {
   }
 
   $(".version_a").click(function(){
-    woopra.track('task_source_add_a');
-  });
+    console.log("button clicked");
+    woopra.track("task_source_add_a");
+  })
 
   $(".version_b").click(function(){
-    woopra.track('task_source_add_b');
-  });
+    console.log("button clicked");
+    woopra.track("task_source_add_b");
+  })
 
   $(".copyCourseLink").on('click', function(e) {
     e.preventDefault();
