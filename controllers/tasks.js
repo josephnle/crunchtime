@@ -24,6 +24,22 @@ exports.index = function(req, res) {
 };
 
 exports.create = function(req, res) {
+  Course.find({createdBy: req.user._id}).exec(
+    function(err, courses) {
+      res.render('tasks/add_task', {'courses': courses});
+    }
+  );
+};
+
+exports.createFromSource = function(req, res) {
+  Course.find({createdBy: req.user._id}).exec(
+    function(err, courses) {
+      res.render('tasks/add_task_from_source', {'courses': courses});
+    }
+  );
+};
+
+exports.store = function(req, res) {
   var task = new Task({
     title: req.body.title,
     due: req.body.due,

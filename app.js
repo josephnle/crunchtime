@@ -90,7 +90,9 @@ app.post('/signup', userController.postSignup);
 // Tasks
 app.get('/', passportConf.isAuthenticated, tasksController.index);
 app.get('/tasks', passportConf.isAuthenticated, tasksController.index);
-app.post('/tasks', passportConf.isAuthenticated, tasksController.create);
+app.get('/tasks/add', passportConf.isAuthenticated, tasksController.create);
+app.get('/tasks/addFromSource', passportConf.isAuthenticated, tasksController.createFromSource);
+app.post('/tasks', passportConf.isAuthenticated, tasksController.store);
 app.post('/tasks/:id/complete', passportConf.isAuthenticated, tasksController.complete);
 app.post('/tasks/:id/uncomplete', passportConf.isAuthenticated, tasksController.uncomplete);
 app.get('/courses', passportConf.isAuthenticated, coursesController.index);

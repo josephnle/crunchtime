@@ -1,0 +1,25 @@
+{{> header}}
+
+{{> nav}}
+
+<div class="container-fluid">
+
+  <div class="btn-group" data-toggle="buttons">
+      {{#each courses}}
+        <label class="btn btn-primary">
+          <input type="radio" name="query" class="courseSearchButton" value="{{name}}"> {{name}}
+        </label>
+      {{/each}}
+  </div>
+  <hr/>
+  <div id="courseSearchResults">
+    <ul class="list-group">
+      <li class="list-group-item">
+        Search a course name to get started!
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+{{> footer}}

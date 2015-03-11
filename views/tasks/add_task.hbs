@@ -1,0 +1,48 @@
+{{> header}}
+
+{{> nav}}
+
+<div class="container-fluid">
+
+  <div class="text-center">
+    <a href="/tasks/addFromSource" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add from
+      Source
+    </a>
+  </div>
+  <hr/>
+  <p><strong>Add Task Manually</strong></p>
+
+  <form id="addTaskForm" method="POST" action="/tasks">
+    <div class="form-group">
+      <label>Course</label><br/>
+        {{#each courses}}
+          <input type="radio" name="course" value="{{_id}}" id="course-{{name}}">
+          <label style="font-weight: normal;" for="course-{{name}}">{{name}}</label>
+        {{/each}}
+    </div>
+    <div class="form-group">
+      <label for="taskTitle">Task Title</label>
+      <input type="text" class="form-control" name="title" id="taskTitle" placeholder="">
+      <!--<a href="#" class="pull-right"><i class="fa fa-plus"></i> Add more</a>-->
+    </div>
+    <div class="form-group">
+      <label for="taskDue">Due Date</label>
+      <input class="datepicker form-control" type="text" name="due" id="taskDue" data-provide="datepicker">
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="shared"> Share this task with others
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Add task"/>
+    </div>
+  </form>
+
+</div>
+
+{{> footer}}
