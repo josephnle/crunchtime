@@ -63,12 +63,12 @@ exports.store = function(req, res) {
             res.send(err);
           }
           res.status(200);
-          res.json(task);
+          res.redirect('/');
         })
       }
       else {
         res.status(200);
-        res.json(task);
+        res.redirect('/');
       }
     });
   });
