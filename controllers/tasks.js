@@ -26,7 +26,7 @@ exports.index = function(req, res) {
 exports.create = function(req, res) {
   Course.find({createdBy: req.user._id}).exec(
     function(err, courses) {
-      res.render('tasks/add_task', {'courses': courses});
+      res.render('tasks/add_task', {'title': 'Add Task', 'courses': courses});
     }
   );
 };
@@ -34,7 +34,7 @@ exports.create = function(req, res) {
 exports.createFromSource = function(req, res) {
   Course.find({createdBy: req.user._id}).exec(
     function(err, courses) {
-      res.render('tasks/add_task_from_source', {'courses': courses});
+      res.render('tasks/add_task_from_source', {'title': 'Add Task from Source', 'courses': courses});
     }
   );
 };
