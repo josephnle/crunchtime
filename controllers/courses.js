@@ -106,7 +106,7 @@ exports.copy = function(req, res) {
 };
 
 exports.search = function(req, res) {
-  var query = new RegExp(req.params.query);
+  var query = new RegExp('/.*' + req.params.query + '.*/');
   var courses = Course.find({ name: query })
     .populate('createdBy', '-password')
     .lean()
