@@ -3,7 +3,7 @@
 {{> nav}}
 
 <div class="container-fluid">
-  <a href="/tasks/add" class="addButton"><i class="fa fa-plus fa-2x"></i></a>
+  <a href="/tasks/add" class="topNavButton"><i class="fa fa-plus fa-2x"></i></a>
   <table class="table">
       {{#each tasks}}
         <tr class="task{{#if completedAt}} text-muted{{/if}}" id="task-{{_id}}">
